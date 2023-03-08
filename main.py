@@ -67,11 +67,14 @@ def handle_text_message(event):
 def response_preprocessing(response: str):
 
     # 消除開發人員提示
-    d_string = '（🔓Developer Mode Output）'
+    print(response)
+    d_string = 'Developer Mode Output'
     if d_string in response:
         print('remove Developer')
         d_start = response.find(d_string)
         new_response = response[d_start + len(d_string):]
+    else:
+        new_response = response
 
     return new_response
 
