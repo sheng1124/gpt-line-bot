@@ -48,13 +48,14 @@ def handle_text_message(event):
     text = event.message.text
     logger.info(f'{user_id}: {text}')
     if text.startswith('/產生圖片'):
-        response = dalle.generate(text[8:].strip())
+        response = dalle.generate(text[5:].strip())
         msg = ImageSendMessage(
             original_content_url=response,
             preview_image_url=response
         )
     elif text.startswith('/清除對話'):
         chatgpt.clean_history(user_id)
+        msg = TextSendMessage(text="喵洽什麼都不記得囉")
     else:
         response = chatgpt.get_response(user_id, text)
         response = response_preprocessing(response)
@@ -74,7 +75,7 @@ def response_preprocessing(response: str):
     if d_string in response:
         print('remove Developer')
         d_start = response.find(d_string)
-        new_response = response[d_start + len(d_string):]
+        new_response = response[d_start + len(d_string) + 2:]
     else:
         new_response = response
 
