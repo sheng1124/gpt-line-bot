@@ -47,12 +47,14 @@ def handle_text_message(event):
     user_id = event.source.user_id
     text = event.message.text
     logger.info(f'{user_id}: {text}')
-    if text.startswith('/imagine'):
+    if text.startswith('/產生圖片'):
         response = dalle.generate(text[8:].strip())
         msg = ImageSendMessage(
             original_content_url=response,
             preview_image_url=response
         )
+    elif text.startswith('/清除對話'):
+        chatgpt.clean_history(user_id)
     else:
         response = chatgpt.get_response(user_id, text)
         response = response_preprocessing(response)
