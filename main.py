@@ -55,6 +55,7 @@ def handle_text_message(event):
         )
     else:
         response = chatgpt.get_response(user_id, text)
+        response = response_preprocessing(response)
         msg = TextSendMessage(text=response)
 
     line_bot_api.reply_message(
@@ -62,6 +63,17 @@ def handle_text_message(event):
         msg
         )
 
+# 對 gpt 的回應做預處理
+def response_preprocessing(response: str):
+
+    # 消除開發人員提示
+    d_string = '（🔓Developer Mode Output）'
+    if d_string in response:
+        print('remove Developer')
+        d_start = response.find(d_string)
+        new_response = response[d_start + len(d_string):]
+
+    return new_response
 
 @app.route("/", methods=['GET'])
 def home():
