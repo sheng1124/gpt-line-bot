@@ -11,6 +11,23 @@
 ## 安裝步驟
 * [參考教學](https://github.com/TheExplainthis/ChatGPT-Line-Bot)
 
+## 本地部屬
+1. 創建 .env 文件
+2. 編輯 .env 文件
+    ![](https://i.imgur.com/ZHkF64b.png)
+3. 前往 [ngrok](https://dashboard.ngrok.com/get-started/setup) 網域代理服務
+4. 安裝 ngrok 丟到主目錄
+5. 認證帳戶 & 授權
+    * ```ngrok config add-authtoken ...```
+6. 啟用端口 8080 
+    * ```ngrok http 8080```
+7. 複製 端口對應網址
+    * ![](https://i.imgur.com/PJ0IVS1.png)
+8. 編輯 linebot webhook settings
+    * ![](https://i.imgur.com/y9y4KUr.png)
+
+
+
 ## 指令
 在文字輸入框中直接輸入文字，即可與 ChatGPT 開始對話，而其他指令如下：
 
